@@ -29,7 +29,7 @@ else:
     SECRET_KEY = 'django-insecure---0nb&&0wo77^ml!p7%(!6yqgf5bip7oh2)l8!+_$-v5%a5@%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False # Debug = falso para fazer o deploy
+DEBUG = True # Debug = falso para fazer o deploy
 
 ALLOWED_HOSTS = ["copianetflixdjango-production.up.railway.app", "localhost", "127.0.0.1"] #Link do site. o * é para permitir todos os servidores
 
