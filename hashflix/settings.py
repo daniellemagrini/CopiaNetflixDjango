@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure---0nb&&0wo77^ml!p7%(!6yqgf5bip7oh2)l8!+_$-v5%a5@%9'
+TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+if TOKEN_CSRF:
+    SECRET_KEY = TOKEN_CSRF
+    CSRF_TRUSTED_ORIGINS = ['https://copianetflixdjango-production.up.railway.app/'] #DEIXA APENAS PARA ESSE DOMINIO
+else:
+    SECRET_KEY = 'django-insecure---0nb&&0wo77^ml!p7%(!6yqgf5bip7oh2)l8!+_$-v5%a5@%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # Debug = falso para fazer o deploy
+DEBUG = False # Debug = falso para fazer o deploy
 
-ALLOWED_HOSTS = ["*"] #Link do site. o * é para permitir todos os servidores
+ALLOWED_HOSTS = ["https://copianetflixdjango-production.up.railway.app/", "localhost", "127.0.0.1"] #Link do site. o * é para permitir todos os servidores
 
 
 # Application definition
@@ -87,7 +93,6 @@ DATABASES = {
 }
 
 import dj_database_url
-import os
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL: #Se estiver no servidor, esse é o BD
